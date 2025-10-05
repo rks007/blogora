@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import connectDB from "./utils/db.js";
 import userRoutes from "./routes/user.route.js";
 import { v2 as cloudinary } from "cloudinary";
+import cors from "cors";
 dotenv.config();
 cloudinary.config({
     cloud_name: process.env.Cloud_Name,
@@ -11,6 +12,7 @@ cloudinary.config({
 });
 const app = express();
 app.use(express.json());
+app.use(cors());
 connectDB();
 app.use("/api/v1", userRoutes);
 const port = process.env.PORT;
